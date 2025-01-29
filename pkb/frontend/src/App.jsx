@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import DocumentList from './components/DocumentList';
 import DocumentViewer from './components/DocumentViewer';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
