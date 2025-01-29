@@ -37,10 +37,18 @@ const App = () => {
         </nav>
 
         <main className="container mx-auto p-8">
-          <Routes>
-            <Route path="/" element={<DocumentList />} />
-            <Route path="/document/:id" element={<DocumentViewer />} />
-          </Routes>
+          <h1 className="text-3xl font-bold mb-4">Welcome to Knowledge Base</h1>
+          <div className="bg-white p-6 rounded-lg shadow">
+            <p className="text-gray-700">This is a test content to verify the page is rendering correctly.</p>
+            <div className="mt-4">
+              <Link 
+                to="/test" 
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Test Link
+              </Link>
+            </div>
+          </div>
         </main>
       </div>
     </Router>
