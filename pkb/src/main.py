@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api.document import router as document_router
+from pkb.src.api.document import router as document_router
 
 app = FastAPI()
 
