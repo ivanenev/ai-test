@@ -12,7 +12,7 @@ fileConfig(config.config_file_name)
 target_metadata = None
 
 def get_url():
-    return f"postgresql+psycopg2://{environ['POSTGRES_USER']}:{environ['POSTGRES_PASSWORD']}@{environ['POSTGRES_HOST']}:{environ['POSTGRES_PORT']}/{environ['POSTGRES_DB']}"
+    return "postgresql+psycopg2://postgres:NEW_PASSWORD@localhost:5432/your_database_name"
 
 def run_migrations_offline():
     context.configure(
