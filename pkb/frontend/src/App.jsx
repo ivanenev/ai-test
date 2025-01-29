@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import DocumentList from './components/DocumentList';
 import DocumentViewer from './components/DocumentViewer';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-2xl font-bold text-blue-600">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
