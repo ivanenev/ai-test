@@ -36,16 +36,21 @@ def test_provider(provider, api_key):
 
 def analyze_providers():
     """Analyze which providers have valid API keys"""
+    # Set UTF-8 encoding for Windows console
+    import sys
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    
     print("API Provider Analysis:")
     print("=" * 40)
     
     for provider in MODEL_PROVIDERS:
         api_key = os.getenv(provider)
         if api_key:
-            status = "✅ Working" if test_provider(provider, api_key) else "❌ Invalid"
+            status = "✓ Working" if test_provider(provider, api_key) else "✗ Invalid"
             print(f"{provider}: {status}")
         else:
-            print(f"{provider}: ❌ Not found in .env")
+            print(f"{provider}: ✗ Not found in .env")
 
 if __name__ == "__main__":
     analyze_providers()
