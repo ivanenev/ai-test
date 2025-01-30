@@ -6,6 +6,7 @@ import FeedbackAgent from './FeedbackAgent';
 const DocumentList = () => {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -14,6 +15,7 @@ const DocumentList = () => {
         setDocuments(response.data);
       } catch (error) {
         console.error('Error fetching documents:', error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -24,6 +26,14 @@ const DocumentList = () => {
 
   if (loading) {
     return <div className="text-center py-8">Loading documents...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8 text-red-600">
+        Error loading documents: {error}
+      </div>
+    );
   }
 
   return (

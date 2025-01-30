@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import DocumentList from './components/DocumentList';
+import DocumentViewer from './components/DocumentViewer';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -63,6 +65,8 @@ const App = () => {
                 </div>
               </div>
             } />
+            <Route path="/documents" element={<DocumentList />} />
+            <Route path="/document/:id" element={<DocumentViewer />} />
           </Routes>
         </main>
       </div>

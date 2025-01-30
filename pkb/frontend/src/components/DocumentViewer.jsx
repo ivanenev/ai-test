@@ -7,6 +7,7 @@ const DocumentViewer = () => {
   const { id } = useParams();
   const [document, setDocument] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDocument = async () => {
@@ -15,6 +16,7 @@ const DocumentViewer = () => {
         setDocument(response.data);
       } catch (error) {
         console.error('Error fetching document:', error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -25,6 +27,14 @@ const DocumentViewer = () => {
 
   if (loading) {
     return <div className="text-center py-8">Loading document...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8 text-red-600">
+        Error loading document: {error}
+      </div>
+    );
   }
 
   if (!document) {
