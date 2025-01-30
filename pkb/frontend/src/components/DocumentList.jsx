@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import FeedbackAgent from './FeedbackAgent';
 
 const DocumentList = () => {
   const [documents, setDocuments] = useState([]);
@@ -50,6 +51,9 @@ const DocumentList = () => {
                 </div>
               </div>
             </Link>
+            <div className="px-4 pb-4">
+              <FeedbackAgent documentId={doc.id} />
+            </div>
           </li>
         ))}
       </ul>

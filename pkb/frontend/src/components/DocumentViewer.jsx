@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import FeedbackAgent from './FeedbackAgent';
 
 const DocumentViewer = () => {
   const { id } = useParams();
@@ -49,6 +50,9 @@ const DocumentViewer = () => {
             </dd>
           </div>
         </dl>
+      </div>
+      <div className="px-4 py-5 sm:px-6">
+        <FeedbackAgent documentId={id} />
       </div>
     </div>
   );
