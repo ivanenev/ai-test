@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from uuid import UUID
 from typing import List
-from ..models.document import DocumentVersion
+from ..models.document import DocumentVersion, Feedback, FeedbackCreate
 from ..repositories.document import DocumentRepository
 from ..dependencies import get_db
+from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/api/documents", tags=["documents"])
 
@@ -25,3 +26,26 @@ async def get_document(document_id: UUID, db: Session = Depends(get_db)):
     if not document:
         raise HTTPException(status_code=404, detail="Document not found")
     return document
+
+@router.post("/{document_id}/feedback")
+async def submit_feedback(
+    document_id: UUID,
+    feedback: FeedbackCreate,
+    db: Session = Depends(get_db)
+):
+    repo = DocumentRepository(db)
+    document = repo.get(document_id)
+    if not document:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    feedback_data = Feedback(
+        document_id=document_id,
+        rating=feedback.rating,
+        comment=feedback.comment,
+        metadata={}
+    )
+    db.add(feedback_data)
+    db.commit()
+    db.refresh(feedback_data)
+    
+    return {"message": "Feedback submitted successfully", "id": str(feedback_data.id)}

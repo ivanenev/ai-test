@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .api.document import router as document_router
 
 app = FastAPI()
+
+# Include document routes
+app.include_router(document_router)
 
 # Configure CORS
 app.add_middleware(
