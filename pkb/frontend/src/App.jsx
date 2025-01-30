@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-100">
       <div className="min-h-screen bg-gray-100">
         <nav className="bg-white shadow">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +66,7 @@ const App = () => {
           </Routes>
         </main>
       </div>
-    </>
+    </div>
   );
 }
 
