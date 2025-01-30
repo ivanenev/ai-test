@@ -3,6 +3,7 @@ from uuid import UUID
 from typing import List
 from ..models.document import DocumentVersion, Feedback, FeedbackCreate
 from ..repositories.document import DocumentRepository
+from ..agents.browser_controller import BrowserController
 from ..dependencies import get_db
 from sqlalchemy.orm import Session
 
@@ -26,6 +27,18 @@ async def get_document(document_id: UUID, db: Session = Depends(get_db)):
     if not document:
         raise HTTPException(status_code=404, detail="Document not found")
     return document
+
+@router.get("/{document_id}/stats")
+async def get_document_stats(
+    document_id: UUID,
+    db: Session = Depends(get_db)
+):
+    """Get document statistics and feedback analysis"""
+    controller = BrowserController(db)
+    stats = controller.get_document_metadata(document_id)
+    if not stats:
+        raise HTTPException(status_code=404, detail="Document not found")
+    return stats
 
 @router.post("/{document_id}/feedback")
 async def submit_feedback(
