@@ -11,7 +11,12 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true,
+    open: {
+      app: {
+        name: 'C:\\Program Files\\Firefox Developer Edition\\firefox.exe',
+        arguments: ['--new-window']
+      }
+    },
     proxy: {
       '/api': {
         target: 'http://localhost:8000',
